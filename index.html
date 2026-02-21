@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Flower Shop 🌸</title>
+<style>
+body { font-family: Arial; background:#fdf2f8; margin:0; padding:20px; }
+h1 { text-align:center; }
+.products { display:flex; gap:20px; flex-wrap:wrap; }
+.card {
+  background:white;
+  padding:15px;
+  border-radius:10px;
+  width:200px;
+  box-shadow:0 4px 8px rgba(0,0,0,0.1);
+}
+button {
+  background:#ec4899;
+  color:white;
+  border:none;
+  padding:8px;
+  border-radius:5px;
+  cursor:pointer;
+}
+.cart {
+  margin-top:30px;
+  background:white;
+  padding:15px;
+  border-radius:10px;
+}
+</style>
+</head>
+<body>
+
+<h1>🌸 Flower Shop 🌸</h1>
+
+<div class="products">
+  <div class="card">
+    <h3>Hoa Hồng</h3>
+    <p>100,000₫</p>
+    <button onclick="addToCart('Hoa Hồng',100000)">Thêm</button>
+  </div>
+
+  <div class="card">
+    <h3>Hoa Tulip</h3>
+    <p>150,000₫</p>
+    <button onclick="addToCart('Hoa Tulip',150000)">Thêm</button>
+  </div>
+
+  <div class="card">
+    <h3>Hoa Cẩm Tú Cầu</h3>
+    <p>200,000₫</p>
+    <button onclick="addToCart('Cẩm Tú Cầu',200000)">Thêm</button>
+  </div>
+</div>
+
+<div class="cart">
+  <h2>🛒 Giỏ Hàng</h2>
+  <ul id="cart-items"></ul>
+  <h3 id="total">Tổng: 0₫</h3>
+  <button onclick="checkout()">Thanh Toán</button>
+</div>
+
+<script>
+let cart = [];
+
+function addToCart(name, price){
+  cart.push({name, price});
+  renderCart();
+}
+
+function renderCart(){
+  let list = document.getElementById("cart-items");
+  list.innerHTML = "";
+  let total = 0;
+
+  cart.forEach(item => {
+    total += item.price;
+    list.innerHTML += `<li>${item.name} - ${item.price.toLocaleString()}₫</li>`;
+  });
+
+  document.getElementById("total").innerText =
+    "Tổng: " + total.toLocaleString() + "₫";
+}
+
+function checkout(){
+  if(cart.length === 0){
+    alert("Giỏ hàng trống!");
+    return;
+  }
+  alert("Thanh toán thành công 🌸");
+  cart = [];
+  renderCart();
+}
+</script>
+
+</body>
+</html>
